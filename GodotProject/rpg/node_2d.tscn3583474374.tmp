@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxuqtxmyo6buo"]
+
+[ext_resource type="Texture2D" uid="uid://bgg8m0j0hc06x" path="res://CharacterMain.png" id="1_0e48y"]
+
+[sub_resource type="GDScript" id="GDScript_wtcfe"]
+script/source = "extends CharacterBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float)
+	if !ls_on_floor():
+		self.velocity.y+=10
+		
+	if Input.is_action_just_pressed(\"ui_accept\"):
+		self.velocity.y=-100
+		
+		move_and_slide()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtcfe"]
+size = Vector2(315, 311)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+size = Vector2(1139.5, 105)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(-3, 0)
+script = SubResource("GDScript_wtcfe")
+
+[node name="CharacterMain" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(538, 160)
+texture = ExtResource("1_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(538, 164)
+shape = SubResource("RectangleShape2D_wtcfe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(580, 590)
+shape = SubResource("RectangleShape2D_0e48y")

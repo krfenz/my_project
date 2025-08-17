@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1av430ekcwo"]
+
+[ext_resource type="Script" uid="uid://b6tia7s46ckj" path="res://Scenes/NPC/npc.gd" id="1_0s07e"]
+[ext_resource type="Texture2D" uid="uid://cjspe4leg8434" path="res://Apocalypse Character Pack/Zombie/Idle.png" id="1_3am0f"]
+[ext_resource type="Texture2D" uid="uid://ce3hk6j2p4fgp" path="res://Apocalypse Character Pack/UI/GUI.png" id="2_bjna2"]
+[ext_resource type="AudioStream" uid="uid://dr3376df3ud4y" path="res://Apocalypse Character Pack/UI/Sfx pack 4 free/Hit/Hit_Hurt4.wav" id="4_aqj1y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjna2"]
+atlas = ExtResource("1_3am0f")
+region = Rect2(37, 100, 28, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s07e"]
+size = Vector2(13, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s07e"]
+atlas = ExtResource("2_bjna2")
+region = Rect2(96, 36, 64, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqj1y"]
+atlas = ExtResource("1_3am0f")
+region = Rect2(105, 102, 15, 14)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8r46"]
+
+[node name="NPC" type="StaticBody2D" groups=["interactable"]]
+process_mode = 3
+script = ExtResource("1_0s07e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_bjna2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 5)
+shape = SubResource("RectangleShape2D_0s07e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="DialogBoxTexture" type="TextureRect" parent="CanvasLayer"]
+offset_right = 341.0
+offset_bottom = 118.0
+texture = SubResource("AtlasTexture_0s07e")
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/DialogBoxTexture"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 37.0
+offset_right = 217.0
+offset_bottom = 60.0
+text = "dz："
+
+[node name="NPCicon" type="TextureRect" parent="CanvasLayer/DialogBoxTexture"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 15.0
+offset_right = 125.0
+offset_bottom = 104.0
+texture = SubResource("AtlasTexture_aqj1y")
+
+[node name="DialogLabel" type="Label" parent="CanvasLayer"]
+offset_left = 182.0
+offset_top = 74.0
+offset_right = 294.0
+offset_bottom = 106.0
+text = "来根锐克五代！"
+label_settings = SubResource("LabelSettings_n8r46")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_aqj1y")

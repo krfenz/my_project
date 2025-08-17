@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://d0xo47l6rn414"]
+
+[ext_resource type="Script" uid="uid://dcpg1kqtx07bt" path="res://Scenes/TresureChest/treasure_chest.gd" id="1_eltpe"]
+[ext_resource type="Texture2D" uid="uid://cxxsmitbftgaa" path="res://Apocalypse Character Pack/Free_Version/Tiles/GK_JC_Free_140.png" id="1_ibnwn"]
+[ext_resource type="Texture2D" uid="uid://dykhnrlnlbrb" path="res://Apocalypse Character Pack/Free_Version/Tiles/GK_JC_Free_139.png" id="2_eltpe"]
+[ext_resource type="Texture2D" uid="uid://8xi5h6tgjinu" path="res://Apocalypse Character Pack/Free_Version/Tiles/GK_JC_Free_008.png" id="4_mh17i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mh17i"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qbtoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ibnwn")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_eltpe")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[node name="TreasureChest" type="StaticBody2D" groups=["interactable"]]
+script = ExtResource("1_eltpe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mh17i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qbtoc")
+animation = &"closed"
+autoplay = "closed"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.5, -18)
+scale = Vector2(1.03125, 0.9375)
+texture = ExtResource("4_mh17i")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

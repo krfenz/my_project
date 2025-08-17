@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx4rqr7uookhy"]
+
+[ext_resource type="Texture2D" uid="uid://dlkp15nn4snrs" path="res://Apocalypse Character Pack/Free_Version/Tilemap/Tilemap.png" id="1_83tkd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_83tkd"]
+bounce = 0.8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aonu2"]
+size = Vector2(9, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyci5"]
+atlas = ExtResource("1_83tkd")
+region = Rect2(521.202, 30.2278, 13.2551, 17.5884)
+
+[node name="Block" type="RigidBody2D" groups=["pushable"]]
+collision_layer = 4
+collision_mask = 15
+physics_material_override = SubResource("PhysicsMaterial_83tkd")
+gravity_scale = 0.0
+linear_damp = 15.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 2.5)
+shape = SubResource("RectangleShape2D_aonu2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_wyci5")
